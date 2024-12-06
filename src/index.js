@@ -1,9 +1,17 @@
 const express = require("express"); //import express library 
+const bodyParser = require("body-parser");
+
 const cors = require("cors"); //import cors
 const app = express(); //create a new express instance in memory 
 
 //- node middleware 
-app.use(cors()) //add cors to node middleware to allow same site or localhost access
+
+//-- enable form json post
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//enable cors to node middleware to allow same site or localhost access
+app.use(cors()) 
 
 const SERVER_PORT = 8080; //localhost range - 3000 - 9999
 
@@ -44,6 +52,26 @@ app.get("/login/:username/:password",(req, res) =>{
 
   });
 
+ app.post("/register", (req, res) => {
+ 
+    const _body = req.body;
+     
+    let _msg = `# register route, body: ${JSON.stringify(_body)}`;
+    console.log(_msg);
+     
+    let _return = {};
+     
+    const _username = _body.username;
+    const _password = _body.password;
+     
+    _msg = "* registration successful";
+    _return = { msg: _msg, register: true };
+
+    res.send(_return);
+
+});
+     
+    
 //-other - POST, DELETE, PUT
 
 //-start node exporess web server - ie: live server
