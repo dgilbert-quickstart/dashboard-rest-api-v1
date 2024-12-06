@@ -66,10 +66,17 @@ app.get("/login/:username/:password",(req, res) =>{
     const _username = _body.username;
     const _password = _body.password;
      
-    _msg = "* registration successful";
-    _return = { msg: _msg, register: true };
+    insert_user(_username, _password, (isnewuser) => {
+        _msg = "* registration successful";
+        _return = { msg: _msg, register: true };
 
-    res.send(_return);
+        if (!isnewuser) {
+            _msg = "* invalid registration, username already exists.";
+            _return = { msg: _msg, register: false };
+        }
+
+        res.send(_return);
+    });
 
 });
      
