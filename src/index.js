@@ -20,7 +20,7 @@ app.get("/test1", (req,res) => {
     res.send(_msg)
 });
 
- app.get("/login/:username/:password",(req, res) =>{
+app.get("/login/:username/:password",(req, res) =>{
  
      const _username = req.params.username;
      const _password = req.params.password;
@@ -33,14 +33,16 @@ app.get("/test1", (req,res) => {
      _msg = "* login successful";
      _data = {'msg':_msg, 'login':true};
  
-     if (_username === null || _username === undefined || _username.trim().toLowerCase() !== "admin")
-     {
-         _msg = "* invalid username/password";
-         _data = {'msg':_msg, 'login':false};
-     }
+     //test code 
+     //if (_username === null || _username === undefined || _username.trim().toLowerCase() !== "useone")
+     //{
+     //    _msg = "* invalid username/password";
+     //    _data = {'msg':_msg, 'login':false};
+     //}
   
      res.send(_data)
- });
+
+  });
 
 //-other - POST, DELETE, PUT
 
