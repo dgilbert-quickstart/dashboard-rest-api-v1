@@ -1,7 +1,8 @@
 const express = require("express"); //import express library 
 const bodyParser = require("body-parser");
-
 const cors = require("cors"); //import cors
+const { login, insert_user } = require("./dbutil");
+
 const app = express(); //create a new express instance in memory 
 
 //- node middleware 
@@ -38,17 +39,18 @@ app.get("/login/:username/:password",(req, res) =>{
  
      let _data = {};
  
-     _msg = "* login successful";
-     _data = {'msg':_msg, 'login':true}; 
- 
-     //test code 
-     //if (_username === null || _username === undefined || _username.trim().toLowerCase() !== "useone")
-     //{
-     //    _msg = "* invalid username/password";
-     //    _data = {'msg':_msg, 'login':false};
-     //}
-  
-     res.send(_data)
+     login(_username, _password, (islogin) => {
+        _msg = "* login successful";
+        _data = { msg: _msg, login: true };
+
+        if (!islogin) {
+            _msg = "* invalid username/password";
+            _data = { msg: _msg, login: false };
+        }
+    
+       res.send(_data)
+
+    });
 
   });
 
