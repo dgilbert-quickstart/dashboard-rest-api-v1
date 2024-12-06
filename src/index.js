@@ -31,7 +31,7 @@ app.get("/login/:username/:password",(req, res) =>{
      let _data = {};
  
      _msg = "* login successful";
-     _data = {'msg':_msg, 'login':true};
+     _data = {'msg':_msg, 'login':true}; 
  
      //test code 
      //if (_username === null || _username === undefined || _username.trim().toLowerCase() !== "useone")
